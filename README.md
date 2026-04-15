@@ -86,11 +86,21 @@ Run `build_output/World.exe`. By default it loads level `LEVL2002`. You can
 specify any other level either by filename or by its numeric suffix:
 
 ```
-World.exe                  # loads levels/LEVL2002.DAT
-World.exe 2001             # loads levels/LEVL2001.DAT
-World.exe LEVL2005.DAT     # loads levels/LEVL2005.DAT
-World.exe C:\path\foo.dat  # absolute path also works
+World.exe                       # loads levels/LEVL2002.DAT
+World.exe 2001                  # loads levels/LEVL2001.DAT
+World.exe LEVL2005.DAT          # loads levels/LEVL2005.DAT
+World.exe C:\path\foo.dat       # absolute path also works
+World.exe --no-stars            # render without the star field
+World.exe --no-stars 2001       # combine flags and a level id
 ```
+
+### Command-line flags
+
+| Flag                                   | Effect                           |
+|---                                     |---                               |
+| `--no-stars`, `-nostars`, `/nostars`   | Disable the star field (pure black background)  |
+
+Any non-flag token is treated as the level identifier.
 
 ### Controls
 

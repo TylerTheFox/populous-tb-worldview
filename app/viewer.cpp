@@ -61,6 +61,7 @@ int         gAtmoIdx = 128;
 std::string gLevelArg;
 char        gLevelTypeChar = '0';
 bool        gDragging = false;
+bool        gStarsEnabled = true;    // disabled via --no-stars / -nostars
 std::uint8_t gStarColor  = 255;      // updated per level type (see renderFrame)
 
 char levelTypeToChar(std::uint8_t t)
@@ -242,7 +243,7 @@ void renderFrame()
     const int pitch = (gFbSide + 3) & ~3;
     std::memset(gFrame, 0, (std::size_t)pitch * gFbSide);
 
-    gPlanet.drawStars(2000, gStarColor);
+    if (gStarsEnabled) gPlanet.drawStars(2000, gStarColor);
     const int tris = gPlanet.drawLandscape(8);
 
     char title[256];
@@ -364,7 +365,21 @@ LRESULT CALLBACK wndProc(HWND h, UINT msg, WPARAM wp, LPARAM lp)
 
 int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR cmdLine, int show)
 {
-    if (cmdLine && *cmdLine) gLevelArg = cmdLine;
+    // Parse the (single-string) command line into whitespace tokens. Each
+    // token either matches a known flag or is treated as the level id —
+    // last non-flag token wins so you can say: World.exe --no-stars 2001
+    for (char *p = cmdLine ? cmdLine : (char *)""; *p; ) {
+        while (*p == ' ' || *p == '\t') ++p;
+        if (!*p) break;
+        char *start = p;
+        while (*p && *p != ' ' && *p != '\t') ++p;
+        std::string tok(start, p);
+        if (tok == "--no-stars" || tok == "-nostars" || tok == "/nostars") {
+            gStarsEnabled = false;
+        } else {
+            gLevelArg = tok;
+        }
+    }
 
     WNDCLASSA wc{};
     wc.lpfnWndProc   = wndProc;
