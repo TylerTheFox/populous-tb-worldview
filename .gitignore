@@ -1,0 +1,48 @@
+# CMake out-of-tree build directories
+build/
+build-*/
+cmake-build-*/
+out/
+
+# Visual Studio / MSBuild artefacts
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+*.suo
+*.user
+*.obj
+*.o
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.dll
+*.idb
+*.tlog
+*.log
+*.cache
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+
+# Built executables in the staging dir — keep the data/ and levels/
+# folders, just ignore the exe itself.
+build_output/World.exe
+build_output/*.exe
+build_output/*.pdb
+build_output/*.ilk
+
+# Hidden files / tool folders
+.vs/
+.vscode/
+.idea/
+.ccls-cache/
+.cache/
+*~
+.DS_Store
+Thumbs.db
+
+# Compiled PGM/smoke output
+*.pgm
