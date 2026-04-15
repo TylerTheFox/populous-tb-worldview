@@ -4,7 +4,7 @@
   <img src="img/app.png" alt="PopTB World viewer" width="480">
 </p>
 
-An educational, clean-room C++17 reimplementation of the **NewWorld** planetary
+An educational, clean-room C++17 reimplementation of the **world** planetary
 view from Bullfrog's 1998 *Populous: The Beginning*. The renderer runs
 entirely in software into an 8-bit palette-indexed framebuffer and presents
 the result through a plain Win32 DIB — no OpenGL, no Direct3D, no shaders.
@@ -154,7 +154,6 @@ From a Developer Command Prompt, or any shell that has `cmake` + a C++
 toolchain in `PATH`:
 
 ```bash
-cd NewWorld
 cmake -B build -G "Visual Studio 17 2022" -A x64
 cmake --build build --config Release
 ```
