@@ -60,20 +60,20 @@ then presented via a Win32 DIB at whatever resolution the window is.
 flowchart LR
     LEVL["levels/LEVL*.DAT<br>(altitudes, levelType)"] --> LOADER[Level loader]
     LEVLHDR["levels/LEVL*.HDR<br>(v2 metadata)"] --> LOADER
-    LOADER --> ALTS[(altitudes[128x128])]
-    LOADER --> META[(metadata)]
+    LOADER --> ALTS[("altitudes 128×128")]
+    LOADER --> META[("metadata")]
     META --> PICK[Pick level-type<br>tables]
     BIG["data/bigf0-N.dat"] --> PICK
     DISP["data/disp0-N.dat"] --> PICK
     PICK --> TEXBUILD[Texpage builder]
     ALTS --> TEXBUILD
-    TEXBUILD --> TEXPAGE[(256x4096<br>palette atlas)]
+    TEXBUILD --> TEXPAGE[("256×4096 palette atlas")]
     PAL["data/pal0-N.dat"] --> PALSET[Palette install]
     FADE["data/fade0-N.dat"] --> RENDER
     AL["data/al0-N.dat"] --> RENDER
     TEXPAGE --> RENDER[Planet renderer]
     PALSET --> DIB[Win32 DIB]
-    RENDER --> FB[(8bpp framebuffer)]
+    RENDER --> FB[("8bpp framebuffer")]
     FB --> DIB
     DIB --> SCREEN[Window]
 ```
